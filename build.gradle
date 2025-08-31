@@ -1,0 +1,48 @@
+plugins {
+    id "net.neoforged.moddev" version "2.0.+"
+    id "java"
+}
+
+group = "com.ziyad.militaryvillagers"
+version = "1.0.0"
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+repositories {
+    maven { url = "https://maven.neoforged.net/releases" }
+    mavenCentral()
+}
+
+neoForge {
+    // اختر إصدار 21.6.x-beta مناسب لنسخة 1.21.6
+    version = "21.6.18-beta"
+
+    // تكوين مهام التشغيل *داخل* neoForge
+    runs {
+        client {
+            client()                          // نوع التشغيل
+            gameDirectory = project.file("run")
+            systemProperty "forge.logging.console.level", "debug"
+        }
+        server {
+            server()
+            gameDirectory = project.file("runServer")
+        }
+        data {
+            data()
+            gameDirectory = project.file("runData")
+        }
+    }
+
+    // عرّف مودك عشان يحمّله في الـruns
+    mods {
+        militaryvillagers {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+// (اختياري) إعدادات اختبار JUnit
+tasks.test { useJUnitPlatform() }
