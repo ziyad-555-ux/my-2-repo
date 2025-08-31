@@ -1,0 +1,6 @@
+modLoader="javafml"
+license="MIT"
+[[mods]]
+modId="militaryvillagers"
+version="1.0.0"
+displayName="Military Villagers"
